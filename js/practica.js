@@ -578,14 +578,82 @@ console.log("a facturar");
 arrayElectrodomesticosFacturados.forEach(function(elemento, indice, array) {
     console.log(elemento, indice);
 })
-
+MostrarFactura();
 descontarDeInventario(/*this.arrayElectrodomesticos,this.arrayElectrodomesticosFacturados*/);
 MostrarInventario();
 function MostrarInventario(){
-    console.log("inventario general despues de facturar");
-    arrayElectrodomesticos.forEach(function(elemento, indice, array) {
-        console.log(elemento, indice);
-    })
+    alert("inventario general");
+    var a;
+    var b;
+    var mensaje ="";
+    var internacional;
+    var conSintonizador;
+    var valor;
+    for (var i=0;i<arrayElectrodomesticos.length;i++){
+        a= arrayElectrodomesticos[i] instanceof Televisor;
+        b= arrayElectrodomesticos[i] instanceof Nevera;
+        if(arrayElectrodomesticos[i].esNacional){
+            internacional = "nacionales";
+        }else{
+            internacional = "internacionales";
+        }
+        if(a==true){            
+            if(arrayElectrodomesticosFacturados[i].esSintonizador){
+                conSintonizador = "con sintonizador";
+            }else{
+                conSintonizador = "sin sintonizador";
+            }
+            valor = arrayElectrodomesticos[i].valor*arrayElectrodomesticos[i].cantidad;
+            mensaje=mensaje+arrayElectrodomesticos[i].cantidad + " TV de consumo " + arrayElectrodomesticos[i].consumo + " " +internacional + " " + conSintonizador + "\n";
+        }else if(b==true){
+            valor = arrayElectrodomesticos[i].valor*arrayElectrodomesticos[i].cantidad;
+            mensaje=mensaje+arrayElectrodomesticos[i].cantidad + " Neveras de consumo " + arrayElectrodomesticos[i].consumo + " " +internacional + "  con capacidad de " + arrayElectrodomesticos[i].capacidad +" litros" + "\n";
+        }else{
+            valor = arrayElectrodomesticos[i].valor*arrayElectrodomesticos[i].cantidad;
+            mensaje=mensaje+arrayElectrodomesticos[i].cantidad + " Electrodomesticos generales de consumo " + arrayElectrodomesticos[i].consumo + " " +internacional +  "\n";                        
+        }
+    }
+    alert(mensaje);
+
+}
+function MostrarFactura(){
+    alert("Factura:");
+    var a;
+    var b;
+    var totalFactura= 0;
+    var mensaje ="";
+    var internacional;
+    var conSintonizador;
+    var valor;
+    for (var i=0;i<arrayElectrodomesticosFacturados.length;i++){
+        a= arrayElectrodomesticosFacturados[i] instanceof Televisor;
+        b= arrayElectrodomesticosFacturados[i] instanceof Nevera;
+        if(arrayElectrodomesticosFacturados[i].esNacional){
+            internacional = "nacionales";
+        }else{
+            internacional = "internacionales";
+        }
+        if(a==true){            
+            if(arrayElectrodomesticosFacturados[i].esSintonizador){
+                conSintonizador = "con sintonizador";
+            }else{
+                conSintonizador = "sin sintonizador";
+            }
+            valor = arrayElectrodomesticosFacturados[i].valor*arrayElectrodomesticosFacturados[i].cantidad;
+            mensaje=mensaje+arrayElectrodomesticosFacturados[i].cantidad + " TV de consumo " + arrayElectrodomesticosFacturados[i].consumo + " " +internacional + " " + conSintonizador + "     Valor: " + valor + "\n";
+            totalFactura = totalFactura + valor;
+        }else if(b==true){
+            valor = arrayElectrodomesticosFacturados[i].valor*arrayElectrodomesticosFacturados[i].cantidad;
+            mensaje=mensaje+arrayElectrodomesticosFacturados[i].cantidad + " Neveras de consumo " + arrayElectrodomesticosFacturados[i].consumo + " " +internacional + "  con capacidad de " + arrayElectrodomesticosFacturados[i].capacidad +" litros" + "     Valor: " + valor + "\n";
+            totalFactura = totalFactura + valor;
+        }else{
+            valor = arrayElectrodomesticosFacturados[i].valor*arrayElectrodomesticosFacturados[i].cantidad;
+            mensaje=mensaje+arrayElectrodomesticosFacturados[i].cantidad + " Electrodomesticos generales de consumo " + arrayElectrodomesticosFacturados[i].consumo + " " +internacional +  "     Valor: " + valor + "\n";
+            totalFactura = totalFactura + valor;            
+        }
+    }
+    mensaje = mensaje + "Total factura: " + totalFactura;
+    alert(mensaje);
 }
 
 
